@@ -20,6 +20,24 @@ describe ToyRobot do
         @robot.report.should be_nil
       end
     end
+
+    describe "place" do
+
+      describe "with no params" do
+        it "should place the robot in position 0,0" do
+          @robot.place
+          @robot.report.should eq ToyRobot::origin 
+        end
+      end
+
+      [[0,1],[1,0],[3,4]].each{|position|
+        describe "with valid param #{position}" do
+          @robot.place(position)         
+          @robot.report.should eq position
+        end  
+      }
+    end
+
   end
 
 end
