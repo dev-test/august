@@ -42,7 +42,7 @@ describe ToyRobot do
      describe "with invalid params #{position}" do 
        it "should ignore the place" do
          @robot.place(position, :NORTH)
-         @report.should be_nil
+         @robot.report.should be_nil
        end
      end
    }
@@ -69,5 +69,6 @@ describe ToyRobot do
           @robot.facing.should eq arr[1]
         }
       end
+    end
   end
 end
