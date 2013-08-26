@@ -47,4 +47,27 @@ describe ToyRobot do
      end
    }
   end
+
+  describe "turning" do
+
+    before(:each) do
+      @robot.place
+    end
+
+    describe "left" do
+      it "should turn from NORTH to WEST to SOUTH to EAST and back to NORTH" do
+        [[:left, :WEST], [:left, :SOUTH], [:left, :EAST], [:left, :NORTH]].each{|arr|
+          @robot.send(arr[0])
+          @robot.facing.should eq arr[1]
+        }
+      end
+    end
+    describe "right" do 
+      it "should turn from NORTH to EAST to SOUTH to WEST and back to North" do
+        [[:right, :EAST], [:right, :SOUTH], [:right, :WEST], [:right, :NORTH]].each{|arr|
+          @robot.send(arr[0])
+          @robot.facing.should eq arr[1]
+        }
+      end
+  end
 end
