@@ -71,4 +71,61 @@ describe ToyRobot do
       end
     end
   end
+
+  describe "move" do
+    before(:each) do
+      @robot.place
+    end
+    describe "from the default position" do
+      describe "moving NORTH" do
+        it "once should move the position to 1,0" do
+          @robot.move
+          @robot.report.should eq "[1, 0], NORTH" 
+        end 
+        it "15 times should not move over the edge of the board" do
+          15.times{
+            @robot.move
+          }
+          @robot.report.should eq "[4, 0], NORTH"
+        end
+      end
+    end
+    describe "from positon [2,2], NORTH" do
+      before(:each) do
+        @robot.place([2,2], :NORTH)
+      end
+
+      describe "moving NORTH" do
+        it "should move to 3, 2" do
+          @robot.move
+          @robot.report.should eq "[3, 2], NORTH"
+        end
+      end
+      
+      describe "moving WEST" do
+        it "should move to 2, 1" do
+          @robot.left
+          @robot.move
+          @robot.report.should eq "[2, 1], WEST"
+        end
+      end
+
+      describe "moving SOUTH" do
+        it "should move to 1, 2" do
+          @robot.left
+          @robot.left
+          @robot.move
+          @robot.report.should eq "[1, 2], SOUTH"
+        end
+      end
+
+      describe "move EAST" do
+        it "should move to 2, 3" do
+          @robot.right
+          @robot.move
+          @robot.report.should eq "[2, 3], EAST"
+        end
+      end
+    end
+  end
 end
