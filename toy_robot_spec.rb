@@ -1,4 +1,4 @@
-require 'toy_robot'
+require '/Users/jeromepaul/locomote/toy_robot.rb'
 
 describe ToyRobot do
   context "when initialized" do
