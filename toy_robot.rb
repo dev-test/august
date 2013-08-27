@@ -2,10 +2,10 @@ class ToyRobot
   ORIGIN = [0,0]
   VALID_RANGE = 0..4
   COMPASS = {
-    :NORTH => {:left => :WEST, :right => :EAST, :move => [1,0]},
-    :SOUTH => {:left => :EAST, :right => :WEST, :move => [-1,0]},
-    :EAST => {:left => :NORTH, :right => :SOUTH, :move => [0,1]},
-    :WEST => {:left => :SOUTH, :right => :NORTH, :move => [0,-1]}
+    :NORTH => {:left => :WEST, :right => :EAST, :move => [0,1]},
+    :SOUTH => {:left => :EAST, :right => :WEST, :move => [0,-1]},
+    :EAST => {:left => :NORTH, :right => :SOUTH, :move => [1,0]},
+    :WEST => {:left => :SOUTH, :right => :NORTH, :move => [-1,0]}
   }
 
   def facing 
@@ -49,7 +49,7 @@ class ToyRobot
     if facing == nil
       @facing = :NORTH
     else
-      @facing = facing
+      @facing = facing.upcase.to_sym
     end
   end
 end

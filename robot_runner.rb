@@ -7,7 +7,7 @@ while input = gets
   case input
   when /^PLACE$/i
     robot.place
-  when /^PLACE \d, \d, NORTH|SOUTH|EAST|WEST$/
+  when /^PLACE \d,\d,NORTH|SOUTH|EAST|WEST$/i
     data = input.match(/^PLACE (\d),(\d),(\w*)$/i)
     robot.place([data[1].to_i, data[2].to_i], data[3]) 
   when /^MOVE$/i

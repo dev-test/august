@@ -1,4 +1,4 @@
-require '/Users/jeromepaul/locomote/toy_robot.rb'
+require_relative 'toy_robot'
 
 describe ToyRobot do
   before(:each) do
@@ -29,7 +29,7 @@ describe ToyRobot do
       end
     end
 
-    [[0,1],[1,0],[3,4]].each{|position|
+    [[1,0],[0,1],[4,3]].each{|position|
       describe "with valid param #{position} facing SOUTH" do
         it "should place the robot in that tile facing SOUTH" do
           @robot.place(position, :SOUTH)         
@@ -37,6 +37,17 @@ describe ToyRobot do
         end
       end  
     }
+
+   describe "with facing being a string like 'EAST' or 'east'" do
+     it "should convert the string 'EAST' to a sym" do
+       @robot.place([3,4], "EAST")
+       @robot.facing.should eq :EAST
+     end
+     it "should convert the string 'east' to uppercase" do
+       @robot.place([1,2], "east")
+       @robot.facing.should eq :EAST
+     end
+   end
 
    [[-1,4], [0,5]].each{|position|
      describe "with invalid params #{position}" do 
@@ -78,15 +89,15 @@ describe ToyRobot do
     end
     describe "from the default position" do
       describe "moving NORTH" do
-        it "once should move the position to 1,0" do
+        it "once should move the position to 0,1" do
           @robot.move
-          @robot.report.should eq "[1, 0], NORTH" 
+          @robot.report.should eq "[0, 1], NORTH" 
         end 
         it "15 times should not move over the edge of the board" do
           15.times{
             @robot.move
           }
-          @robot.report.should eq "[4, 0], NORTH"
+          @robot.report.should eq "[0, 4], NORTH"
         end
       end
     end
@@ -96,34 +107,34 @@ describe ToyRobot do
       end
 
       describe "moving NORTH" do
-        it "should move to 3, 2" do
+        it "should move to 2, 3" do
           @robot.move
-          @robot.report.should eq "[3, 2], NORTH"
+          @robot.report.should eq "[2, 3], NORTH"
         end
       end
       
       describe "moving WEST" do
-        it "should move to 2, 1" do
+        it "should move to 1, 2" do
           @robot.left
           @robot.move
-          @robot.report.should eq "[2, 1], WEST"
+          @robot.report.should eq "[1, 2], WEST"
         end
       end
 
       describe "moving SOUTH" do
-        it "should move to 1, 2" do
+        it "should move to 2, 1" do
           @robot.left
           @robot.left
           @robot.move
-          @robot.report.should eq "[1, 2], SOUTH"
+          @robot.report.should eq "[2, 1], SOUTH"
         end
       end
 
       describe "move EAST" do
-        it "should move to 2, 3" do
+        it "should move to 3, 2" do
           @robot.right
           @robot.move
-          @robot.report.should eq "[2, 3], EAST"
+          @robot.report.should eq "[3, 2], EAST"
         end
       end
     end
